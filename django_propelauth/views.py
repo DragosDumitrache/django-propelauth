@@ -1,8 +1,10 @@
+import logging
 import random
 import string
 
 import propelauth_py
 import requests
+from django.contrib.auth import logout
 from django.http import HttpResponse
 from django.shortcuts import redirect
 # Create your views here.
@@ -18,6 +20,7 @@ AUTH_REDIRECT_URI = 'http://localhost:8080/auth/callback'
 
 raw_auth = propelauth_py.init_base_auth(AUTH_URL, API_KEY)
 
+logger = logging.getLogger(__name__)
 
 def get_auth_url(state):
     authorize_url = f"{AUTH_URL}/propelauth/authorize?response_type=code&client_id={AUTH_CLIENT_ID}&redirect_uri={AUTH_REDIRECT_URI}&state={state}"
@@ -105,9 +108,10 @@ def callback(request):
 
 
 @api_view(['GET'])
-def logout(request):
+def logout_view(request):
+    logout(request)
     response = redirect("/", status=302)
-    # logger.info(event='auth.logout', redirect_to='/')
+    logger.error('auth.logout redirect_to=/')
     response.set_cookie("pa-access-token", "", max_age=0, secure=True, httponly=True, samesite="Lax")
     response.set_cookie("pa-refresh-token", "", max_age=0, secure=True, httponly=True, samesite="Lax")
     return response
