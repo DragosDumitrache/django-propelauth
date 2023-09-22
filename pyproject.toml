@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "django-propelauth"
+version = "0.1.0"
+description = ""
+authors = ["Dragos Dumitrache <dragos@xcharta.ai>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^4.2.5"
+propelauth-django-rest-framework = "^2.1.4"
+logger = "^1.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
