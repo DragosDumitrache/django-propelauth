@@ -52,7 +52,7 @@ class SimpleMiddleware:
                 authenticate(request)
             except UnauthorizedException as e:
                 logger.error('user.not_logged_in user=%s message=%s', request.session.get('propelauth_user'), e.message)
-                return redirect('/who-am-i', status_code=401)
+                return redirect('/auth/login', status_code=401)
             except Exception as e:
                 logger.error('some_other_exception')
         logger.error('Before we process the request user=%s', request.user.is_authenticated)
