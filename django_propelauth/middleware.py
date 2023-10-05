@@ -1,8 +1,7 @@
 import logging
 
 import requests
-from django.conf import settings
-from django.contrib.auth import authenticate, logout
+from django.contrib.auth import authenticate
 from django.contrib.auth.middleware import PersistentRemoteUserMiddleware
 from django.shortcuts import redirect
 from propelauth_py import UnauthorizedException
